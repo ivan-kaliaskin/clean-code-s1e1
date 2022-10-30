@@ -10,7 +10,7 @@
 
 var taskInput=document.getElementById("new-task-input");//Add a new task.
 var addButton=document.getElementsByTagName("button")[0];//first button
-var incompleteTaskHolder=document.getElementById("incomplete-tasks-unordered-list");//unordered-list of #incomplete-tasks-unordered-list
+var incompleteTaskHolder=document.getElementById("incomplete-task-list");//task-list of #incomplete-task-list
 var completedTasksHolder=document.getElementById("completed-tasks-list");//completed-tasks-list
 
 
@@ -34,7 +34,7 @@ var createNewTaskElement=function(taskString){
     var deleteButtonImg=document.createElement("img");//delete button image
 
     label.innerText=taskString;
-    label.className='label task';
+    label.className='lbl task';
 
     //Each elements, needs appending
     checkBox.type="checkbox";
@@ -42,10 +42,10 @@ var createNewTaskElement=function(taskString){
     editInput.className="input task";
 
     editButton.innerText="Edit"; //innerText encodes special characters, HTML does not.
-    editButton.className="button edit";
+    editButton.className="btn edit";
 
-    deleteButton.className="button delete";
-    deleteButtonImg.className='icon-for-delete-button';
+    deleteButton.className="btn delete";
+    deleteButtonImg.className='delete-btn-icon';
     deleteButtonImg.src='./remove.svg';
     deleteButtonImg.setAttribute('alt', `Remove button for ${taskString} task`)
     deleteButton.appendChild(deleteButtonImg);
@@ -112,7 +112,7 @@ var deleteTask=function(){
 
     var listItem=this.parentNode;
     var unorderedList=listItem.parentNode;
-    //Remove the parent list item from the unordered-list.
+    //Remove the parent list item from the task-list.
     unorderedList.removeChild(listItem);
 
 }
@@ -134,7 +134,7 @@ var taskIncomplete=function(){
     console.log("Incomplete Task...");
 //Mark task as incomplete.
     //When the checkbox is unchecked
-    //Append the task list item to the #incomplete-tasks-unordered-list.
+    //Append the task list item to the #incomplete-task-list.
     var listItem=this.parentNode;
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem,taskCompleted);
@@ -171,7 +171,7 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
     checkBox.onchange=checkBoxEventHandler;
 }
 
-//cycle over incompleteTaskHolder unordered-list list items
+//cycle over incompleteTaskHolder task-list list items
 //for each list item
 for (var i=0; i<incompleteTaskHolder.children.length;i++){
 
@@ -182,7 +182,7 @@ for (var i=0; i<incompleteTaskHolder.children.length;i++){
 
 
 
-//cycle over completedTasksHolder unordered-list list items
+//cycle over completedTasksHolder task-list list items
 for (var i=0; i<completedTasksHolder.children.length;i++){
     //bind events to list items chldren(tasksIncompleted)
     bindTaskEvents(completedTasksHolder.children[i],taskIncomplete);
