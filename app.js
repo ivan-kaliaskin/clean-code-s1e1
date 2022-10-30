@@ -8,17 +8,17 @@
 
 // Event handling, user interaction is what starts the code execution.
 
-var taskInput=document.getElementById("new-task");//Add a new task.
+var taskInput=document.getElementById("new-task-input");//Add a new task.
 var addButton=document.getElementsByTagName("button")[0];//first button
-var incompleteTaskHolder=document.getElementById("incomplete-tasks");//ul of #incomplete-tasks
-var completedTasksHolder=document.getElementById("completed-tasks");//completed-tasks
+var incompleteTaskHolder=document.getElementById("incomplete-tasks-unordered-list");//unordered-list of #incomplete-tasks-unordered-list
+var completedTasksHolder=document.getElementById("completed-tasks-list");//completed-tasks-list
 
 
 //New task list item
 var createNewTaskElement=function(taskString){
 
-    var listItem=document.createElement("li");
-    listItem.className='li'
+    var listItem=document.createElement("list-item");
+    listItem.className='list-item'
     //input (checkbox)
     var checkBox=document.createElement("input");//checkbx
     checkBox.className='input'
@@ -45,7 +45,7 @@ var createNewTaskElement=function(taskString){
     editButton.className="button edit";
 
     deleteButton.className="button delete";
-    deleteButtonImg.className='delete-icon';
+    deleteButtonImg.className='icon-for-delete-button';
     deleteButtonImg.src='./remove.svg';
     deleteButtonImg.setAttribute('alt', `Remove button for ${taskString} task`)
     deleteButton.appendChild(deleteButtonImg);
@@ -64,7 +64,7 @@ var createNewTaskElement=function(taskString){
 
 var addTask=function(){
     console.log("Add Task...");
-    //Create a new list item with the text from the #new-task:
+    //Create a new list item with the text from the #new-task-input:
     if (!taskInput.value) return;
     var listItem=createNewTaskElement(taskInput.value);
 
@@ -111,9 +111,9 @@ var deleteTask=function(){
     console.log("Delete Task...");
 
     var listItem=this.parentNode;
-    var ul=listItem.parentNode;
-    //Remove the parent list item from the ul.
-    ul.removeChild(listItem);
+    var unorderedList=listItem.parentNode;
+    //Remove the parent list item from the unordered-list.
+    unorderedList.removeChild(listItem);
 
 }
 
@@ -122,7 +122,7 @@ var deleteTask=function(){
 var taskCompleted=function(){
     console.log("Complete Task...");
 
-    //Append the task list item to the #completed-tasks
+    //Append the task list item to the #completed-tasks-list
     var listItem=this.parentNode;
     completedTasksHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskIncomplete);
@@ -134,7 +134,7 @@ var taskIncomplete=function(){
     console.log("Incomplete Task...");
 //Mark task as incomplete.
     //When the checkbox is unchecked
-    //Append the task list item to the #incomplete-tasks.
+    //Append the task list item to the #incomplete-tasks-unordered-list.
     var listItem=this.parentNode;
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem,taskCompleted);
@@ -171,7 +171,7 @@ var bindTaskEvents=function(taskListItem,checkBoxEventHandler){
     checkBox.onchange=checkBoxEventHandler;
 }
 
-//cycle over incompleteTaskHolder ul list items
+//cycle over incompleteTaskHolder unordered-list list items
 //for each list item
 for (var i=0; i<incompleteTaskHolder.children.length;i++){
 
@@ -182,7 +182,7 @@ for (var i=0; i<incompleteTaskHolder.children.length;i++){
 
 
 
-//cycle over completedTasksHolder ul list items
+//cycle over completedTasksHolder unordered-list list items
 for (var i=0; i<completedTasksHolder.children.length;i++){
     //bind events to list items chldren(tasksIncompleted)
     bindTaskEvents(completedTasksHolder.children[i],taskIncomplete);
