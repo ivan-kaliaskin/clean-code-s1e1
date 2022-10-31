@@ -12,11 +12,11 @@
     text-align: right;
 }
 
-.eisenhower-matrix-img {
+.header__eisenhower-matrix-img {
     width: 100%;
 }
 
-.header .link-eisenhower-matrix {
+.header .header__link-eisenhower-matrix {
     font-family: fantasy, cursive;
 }
 
@@ -40,7 +40,7 @@
     flex-grow: 1;
 }
 
-.task-row-wrapper {
+.add-item-section__task-row-wrapper {
     display: flex;
 }
 
